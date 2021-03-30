@@ -75,16 +75,69 @@ const titles = [
 ];
 
 //Array of authors and the book they wrote
-//"--- wrote --- in ---"
-
+const sentence = books.map(
+  (book) =>
+    book.authorFirst +
+    " " +
+    book.authorLast +
+    " " +
+    "wrote" +
+    " " +
+    book.name +
+    " " +
+    "in" +
+    " " +
+    book.publishDate
+);
+console.log(sentence);
 //Sort books from oldest to most recent
-
+const ordered = books.sort(function (a, b) {
+  if (a.publishDate > b.publishDate) {
+    return -1;
+  } else {
+    return 1;
+  }
+});
+console.log(...ordered);
 //sort books alphabetically
 
+const alphaOrder = books.sort(function (a, b) {
+  if (a.authorFirst > b.authorFirst) {
+    return 1;
+  } else {
+    return -1;
+  }
+});
+console.log(alphaOrder);
+
 //Find who wrote War and Peace
+const warPeace = books.find(function (war) {
+  if (war.name === "War and Peace") {
+    return true;
+  }
+});
+console.log(warPeace.authorFirst + " " + warPeace.authorLast);
 
 //how many books were written before 1900?
-
+const nineteen = books.filter(function (book) {
+  if (book.publishDate < 1900) {
+    return true;
+  }
+});
+console.log(nineteen.length);
 //was there at least one book published within the last 100 years?
-
+const lastHundred = books.some(function (book) {
+  const currentYear = 2021;
+  if (currentYear - book.publishDate <= 100) {
+    return true;
+  }
+});
+console.log(lastHundred);
 //was every book published within the last 100 years?
+const everyOne = books.every(function (book) {
+  const currentYear = 2021;
+  if (currentYear - book.publishDate <= 100) {
+    return true;
+  }
+});
+console.log(everyOne);
